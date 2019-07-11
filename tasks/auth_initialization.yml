@@ -73,7 +73,3 @@
 - name: Restart mongodb service
   service: name={{ mongodb_daemon_name }} state=restarted
   when: mongodb_manage_service
-
-- name: Wait MongoDB port is listening
-  wait_for: host="{{ item }}" port="{{ mongodb_net_port }}" delay=5 state=started
-  with_items: "{{ mongodb_net_bindip.split(',') | map('replace', '0.0.0.0', '127.0.0.1') | list }}"
